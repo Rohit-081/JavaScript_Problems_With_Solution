@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Solving 01</title>
+</head>
+
+<body>
+    <div>
+        <h1>Requirement</h1>
+        <p>
+            - Write method findPath
+        </p>
+        <p>
+            - Should take two params: - object - keys
+        </p>
+        <p>
+            separated by dots as string - Return value if it exists at that path inside the object, else return undefined
+        </p>
+    </div>
+    <div>
+        <h1>Pseudo Code:</h1>
+        <p>1. Given an JSON Object and function name with parameters. </p>
+        <p> 2. Create a function and parameters should be obj and the mentioned string.</p>
+        <p>3. The string should be splitted with the dot and append that string with object to get the output.</p>
+        <p>3.1 Create Loop and traverse the loop get the string splitted variable and one by one append with the object.</p>
+        <p>4. Print console log to get the output.</p>
+    </div>
+</body>
+
+<script>
+    var obj = {
+        a: {
+            b: {
+                c: 12,
+                j: false
+            },
+            k: null
+        }
+    };
+
+    function findPath(obj, str) {
+        if ((!(typeof obj === 'object') || !(typeof str === 'string'))) {
+            return;
+        }
+
+
+        var str1 = str.split('.');
+        var objData;
+        str1.forEach(function(element, index) {
+            if (typeof objData !== "undefined") {
+                objData = objData[element];
+                return;
+            }
+            objData = obj[element];
+        });
+        return objData;
+    }
+
+
+    console.log(findPath(obj, 'a.b.c')); // 12
+    console.log(findPath(obj, 'a.b')); // {c: 12, j: false}
+    console.log(findPath(obj, 'a.b.d')); // undefined
+    console.log(findPath(obj, 'a.c')); // undefined
+    console.log(findPath(obj, 'a.b.c.d')); // undefined
+    console.log(findPath(false, false)); // undefined
+    console.log(findPath(obj, false)); // undefined
+    console.log(findPath(obj, false)); // undefined
+    console.log(findPath(obj, 'a.b.j')); //false
+    console.log(findPath(obj, 'a.b.j.k')); //undefined
+    console.log(findPath(obj, 'a.k')); //null
+    console.log(findPath(obj, 'a.b.c.d.e')); //undefined
+</script>
+
+</html>

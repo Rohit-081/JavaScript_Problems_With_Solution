@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Solving 02</title>
+</head>
+
+<body>
+    <div>
+        <h1>Requirement</h1>
+        <p>
+            Given two non-negative integers, num1 and num2 represented as string, return the sum of num1 and num2 as a string.
+        </p>
+        <p>
+            Example 1: Input: num1 = "11", num2 = "123" Output: "134"
+        </p>
+        <p>
+            Example 2: Input: num1 = "456", num2 = "77" Output: "533"
+        </p>
+        <p>
+            Example 3: Input: num1 = "0", num2 = "0" Output: "0"
+        </p>
+        <p>
+            Constraints:
+            <p>1 less than equal to num1.length, num2.length less than equal to 10^4 </p>
+            <p>num1 and num2 consist of only digits.</p>
+            <p>num1 and num2 don 't have any leading zeros except for the zero itself.</p>
+        </p>
+    </div>
+    <div>
+        <h1>Pseudo Code:</h1>
+        <p>1. Given two non-negative integers, num1 and num2 represented as string</p>
+        <p>2. Firstly I will find out which is greater in length and swap it.</p>
+        <p>3. Traverse in such a way so that i will add no.s from right to left using a carry variable.</p>
+        <p>4. That carry variable is used to store the value of sum of the two variable after getting any carry value i will assign it to the next left value which we gonna do add.</p>
+        <p>5. This is going from right to left and we will print the output.</p>
+
+    </div>
+</body>
+
+<script>
+    var addStrings = function(num1, num2) {
+        var num1Length = num1.length;
+        var num2Length = num2.length;
+        //console.log(num1Length);
+        //console.log(num2Length);
+        if (num1Length < num2Length) {
+            var temp = num1;
+            num1 = num2;
+            num2 = temp;
+        }
+        //console.log(num1);
+        //console.log(num2);
+
+        var num1Right;
+        var num2Right;
+        var carry = 0;
+        var sum;
+        var res = "";
+
+        for (var i = 0; i < num1.length; i++) {
+            num1Right = Number(num1.charAt(num1.length - 1 - i));
+            //console.log(num1Right);
+            num2Right = Number(num2.charAt(num2.length - 1 - i));
+            //console.log(num2Right);
+            sum = String(carry + num1Right + num2Right);
+            //console.log(sum);
+            //console.log(sum.length);
+            if (sum.length > 1) {
+                carry = Number(sum.charAt(0));
+                //console.log(carry);
+                res += sum.charAt(1);
+            } else {
+                carry = 0;
+                res += sum.charAt(0);
+            }
+
+        }
+        return reverseString(res);
+    };
+
+    function reverseString(str) {
+        var splitString = str.split("");
+        var reverseArray = splitString.reverse();
+        var joinArray = reverseArray.join("");
+        return console.log(joinArray);
+    }
+
+
+
+    addStrings("85731737104263", "9333852702227987"); //"9419584439332250"
+    addStrings("190", "25000"); //25190
+    addStrings("24009", "800"); //24809
+    addStrings("190", "2500"); //2690
+    console.log("")
+</script>
+
+</html>
