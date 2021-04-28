@@ -43,51 +43,35 @@
 
 <script>
     var addStrings = function(num1, num2) {
-        var num1Length = num1.length;
-        var num2Length = num2.length;
-        //console.log(num1Length);
-        //console.log(num2Length);
-        if (num1Length < num2Length) {
-            var temp = num1;
-            num1 = num2;
-            num2 = temp;
+        let sum = "";
+        let num1Length = num1.length;
+        let num2Length = num2.length;
+        if (num2Length > num1Length) {
+            let temp = num2;
+            num2 = num1;
+            num1 = temp;
         }
-        //console.log(num1);
-        //console.log(num2);
 
-        var num1Right;
-        var num2Right;
-        var carry = 0;
-        var sum;
-        var res = "";
+        let carry = 0;
+        let a;
+        let b;
+        let temp;
+        let digitSum;
+        for (let i = 0; i < num1.length; i++) {
+            a = parseInt(num1.charAt(num1.length - 1 - i));
+            b = parseInt(num2.charAt(num2.length - 1 - i));
+            b = (b) ? b : 0;
+            temp = (carry + a + b).toString();
+            digitSum = temp.charAt(temp.length - 1);
+            carry = parseInt(temp.substr(0, temp.length - 1));
+            carry = (carry) ? carry : 0;
 
-        for (var i = 0; i < num1.length; i++) {
-            num1Right = Number(num1.charAt(num1.length - 1 - i));
-            //console.log(num1Right);
-            num2Right = Number(num2.charAt(num2.length - 1 - i));
-            //console.log(num2Right);
-            sum = String(carry + num1Right + num2Right);
-            //console.log(sum);
-            //console.log(sum.length);
-            if (sum.length > 1) {
-                carry = Number(sum.charAt(0));
-                //console.log(carry);
-                res += sum.charAt(1);
-            } else {
-                carry = 0;
-                res += sum.charAt(0);
-            }
+            sum = (i === num1.length - 1) ? temp + sum : digitSum + sum;
 
         }
-        return reverseString(res);
+
+        return console.log(sum);
     };
-
-    function reverseString(str) {
-        var splitString = str.split("");
-        var reverseArray = splitString.reverse();
-        var joinArray = reverseArray.join("");
-        return console.log(joinArray);
-    }
 
 
 
@@ -95,7 +79,8 @@
     addStrings("190", "25000"); //25190
     addStrings("24009", "800"); //24809
     addStrings("190", "2500"); //2690
-    console.log("")
+    addStrings("1", "12");
+    addStrings("9", "99");
 </script>
 
 </html>
